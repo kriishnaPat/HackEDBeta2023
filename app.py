@@ -13,46 +13,49 @@ db = SQLAlchemy(app)
 
 # Models
 class Profile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(20), unique=False, nullable=False)
-    last_name = db.Column(db.String(20), unique=False, nullable=False)
-    phone = db.Column(db.String(20), unique=True, nullable=False)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(20), unique=False, nullable=False)
+    __tablename__ = 'profile'
+    id = db.Column(db.Integer,nullable=False, primary_key=True)
+    first_name = db.Column(db.String(20), unique=False, nullable=True)
+    last_name = db.Column(db.String(20), unique=False, nullable=True)
+    phone = db.Column(db.String(20), unique=True, nullable=True)
+    username = db.Column(db.String(20), unique=True, nullable=True)
+    password = db.Column(db.String(20), unique=True, nullable=True)
 
+with app.app_context():
+    # Create the tables
+    db.create_all()
 
-	# repr method represents how one object of this datatable
-	# will look like
 @app.route("/")
 def home():
     return render_template('index2.html') 
 
 @app.route("/signup")
-def login():
+def signup():
     return render_template('signup.html')
 
-@app.route('/add', methods=["POST"])
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
+@app.route("/login", methods=["POST"])
+def validUser():
+    
+    return redirect('messageSchedule.html')
+
+
+@app.route('/signup', methods=["POST"])
 def profile():
-     
-    # In this function we will input data from the 
-    # form page and store it in our database.
-    # Remember that inside the get the name should
-    # exactly be the same as that in the html
-    # input fields
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
     username = request.form.get("username")
     phone = request.form.get("phone_number")   
     password = request.form.get("password")
 
- 
-    # create an object of the Profile class of models
-    # and store data as a row in our datatable
     if first_name != '' and last_name != '' and phone != '' and password != '':
         p = Profile(first_name=first_name, last_name=last_name, phone=phone, username=username, password=password)
         db.session.add(p)
         db.session.commit()
-        return redirect('/')
+        return redirect('/login')
     else:
         return redirect('/')
 
