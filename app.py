@@ -25,7 +25,7 @@ class Profile(db.Model):
 	# will look like
 @app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template('index2.html') 
 
 @app.route("/signup")
 def login():
