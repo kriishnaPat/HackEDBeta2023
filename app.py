@@ -27,9 +27,9 @@ class Profile(db.Model):
 def home():
     return render_template('index.html')
 
-@app.route("/login")
+@app.route("/signup")
 def login():
-    return render_template('login.html')
+    return render_template('signup.html')
 
 @app.route('/add', methods=["POST"])
 def profile():
