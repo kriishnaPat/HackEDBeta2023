@@ -17,14 +17,12 @@ class Profile(db.Model):
     first_name = db.Column(db.String(20), unique=False, nullable=False)
     last_name = db.Column(db.String(20), unique=False, nullable=False)
     phone = db.Column(db.String(20), unique=True, nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(20), unique=False, nullable=False)
 
 
 	# repr method represents how one object of this datatable
 	# will look like
-def __repr__(self):
-	return f"Name : {self.first_name}, Age: {self.age}"
-	
 @app.route("/")
 def home():
     return render_template('index.html')
@@ -43,6 +41,7 @@ def profile():
     # input fields
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
+    username = request.form.get("username")
     phone = request.form.get("phone_number")   
     password = request.form.get("password")
 
@@ -50,7 +49,7 @@ def profile():
     # create an object of the Profile class of models
     # and store data as a row in our datatable
     if first_name != '' and last_name != '' and phone != '' and password != '':
-        p = Profile(first_name=first_name, last_name=last_name, phone=phone, password=password)
+        p = Profile(first_name=first_name, last_name=last_name, phone=phone, username=username, password=password)
         db.session.add(p)
         db.session.commit()
         return redirect('/')
