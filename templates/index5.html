@@ -1,22 +1,51 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>Add Account</title>
-   </head>
-   <body>
-      <h3>Create Account</h3>
-      <form action="/add" method="POST">
-         <label>First Name</label>
-         <input type="text" name="first_name" placeholder="first name...">
-         <label>Last Name</label>
-         <input type="text" name= "last_name" placeholder="last name...">
-         <label>Phone Number</label>
-         <input type="text" name= "phone_number" placeholder="phone number..">
-         <label>Username</label>
-         <input type="text" name= "phone_number" placeholder="phone number..">
-         <label>Password</label>
-         <input type="text" name= "password" placeholder="password">
-         <button type="submit">Add</button>
-      </form>
-   </body>
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remindify</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Remindify</h1>
+    <button onclick="redirectToPage1()">Go to Page 1</button>
+  <button onclick="redirectToPage2()">Go to Page 2</button>
+
+  <script>
+    alert("JavaScript is working!");
+  </script>
+
+  <script>
+    function redirectToPage1() {
+  alert('Redirecting to Page 1');
+  window.location.href = 'login.html';
+}
+
+    function redirectToPage2() {
+   alert('Redirecting to Page 2');
+   window.location.href = 'signup.html';
+}
+
+  </script>
+
+</body>
 </html>
