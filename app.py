@@ -28,8 +28,13 @@ def home():
     return render_template('index2.html') 
 
 @app.route("/signup")
-def login():
+def signup():
     return render_template('signup.html')
+
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
 
 @app.route('/add', methods=["POST"])
 def profile():
