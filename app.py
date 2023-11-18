@@ -1,9 +1,11 @@
 from flask import Flask, request, redirect
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.debug = True
+bcrypt = Bcrypt(app)
 
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -20,6 +22,10 @@ class Profile(db.Model):
     phone = db.Column(db.String(20), unique=True, nullable=True)
     username = db.Column(db.String(20), unique=True, nullable=True)
     password = db.Column(db.String(20), unique=True, nullable=True)
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
 with app.app_context():
     # Create the tables
@@ -37,10 +43,21 @@ def signup():
 def login():
     return render_template('login.html')
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=['GET',"POST"])
 def validUser():
+    username = request.form.get("username")
+    password = request.form.get("password") 
+    user = Profile.query.filter_by(username=username).first()
+    if user and user.password == password:
+            # Passwords match, proceed with login
+            return redirect('/message_scheduler.html')
+    else:
+            # Incorrect username or password, handle accordingly
+            return render_template('login.html')
+
+    #return render_template('login.html')
+
     
-    return redirect('messageSchedule.html')
 
 
 @app.route('/signup', methods=["POST"])
