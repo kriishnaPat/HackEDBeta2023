@@ -10,7 +10,6 @@
     <h2>Set Reminder</h2>
     <form action="message_scheduler" method="post">
         <input type="text" name="goal" placeholder="Enter your goal here!" required>
-        <input type="date" name="date" placeholder="Enter the day you would like to be reminded!" required>
         <input type="time" name="time" placeholder="Enter the time you would like to be reminded at" required>
         <div class="error_message">{{ msg }}</div>
         <button type="submit">Submit</button>
