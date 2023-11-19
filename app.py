@@ -1,6 +1,7 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, session
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
+import scheduler.py
 
 app = Flask(__name__)
 app.debug = True
@@ -13,16 +14,18 @@ db = SQLAlchemy(app)
 
 # Models
 class Profile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(20), unique=False, nullable=False)
-    last_name = db.Column(db.String(20), unique=False, nullable=False)
-    phone = db.Column(db.String(20), unique=True, nullable=False)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(20), unique=False, nullable=False)
+    __tablename__ = 'profile'
+    id = db.Column(db.Integer,nullable=False, primary_key=True)
+    first_name = db.Column(db.String(20), unique=False, nullable=True)
+    last_name = db.Column(db.String(20), unique=False, nullable=True)
+    phone = db.Column(db.String(20), unique=True, nullable=True)
+    username = db.Column(db.String(20), unique=True, nullable=True)
+    password = db.Column(db.String(20), unique=True, nullable=True)
 
+with app.app_context():
+    # Create the tables
+    db.create_all()
 
-	# repr method represents how one object of this datatable
-	# will look like
 @app.route("/")
 def home():
     return render_template('index2.html') 
@@ -39,11 +42,19 @@ def signup_redirect():
 
     return render_template('signup_redirect.html')
 
+@app.route("/login", methods=['GET',"POST"])
+def validUser():
+    username = request.form.get("username")
+    password = request.form.get("password") 
+    user = Profile.query.filter_by(username=username).first()
+    if user and user.password == password:
+            session['username'] = username
+            # Passwords match, proceed with login
+            return redirect('/message_schedule')
+    else:
+            # Incorrect username or password, handle accordingly
+            return render_template('login.html')
 
-
-@app.route("/login")
-def login():
-    return render_template('login.html')
 
 @app.route("/login_redirect", methods=['GET', 'POST'])
 def login_redirect():
@@ -53,30 +64,36 @@ def login_redirect():
 
     return render_template('login_redirect.html')
 
-@app.route('/add', methods=["POST"])
+@app.route('/signup', methods=["POST"])
 def profile():
-     
-    # In this function we will input data from the 
-    # form page and store it in our database.
-    # Remember that inside the get the name should
-    # exactly be the same as that in the html
-    # input fields
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
     username = request.form.get("username")
     phone = request.form.get("phone_number")   
     password = request.form.get("password")
 
- 
-    # create an object of the Profile class of models
-    # and store data as a row in our datatable
+
     if first_name != '' and last_name != '' and phone != '' and password != '':
         p = Profile(first_name=first_name, last_name=last_name, phone=phone, username=username, password=password)
         db.session.add(p)
         db.session.commit()
-        return redirect('/')
+        return redirect('/login')
     else:
         return redirect('/')
+    
+@app.route("/message_schedule", methods=["POST"])
+def send_scheduled_texts():
+    username = session.get('username')
+    message = request.form.get("goal")
+    time = request.form.get("time")
+    user = Profile.query.filter_by(username = username).first()
+    phone = user.phone
+    try:
+        scheduler.schedule_message(phone, time, message)
+        return "done"
+    except Exception as e:
+        print(e)
+        return "done"
 
 if __name__ == '__main__':
 	app.run()
