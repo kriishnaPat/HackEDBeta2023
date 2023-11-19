@@ -36,11 +36,14 @@ def home():
 def signup():
     return render_template('signup.html')
 
-@app.route("/signup_redirect", methods=['GET', 'POST'])
-def signup_redirect():
+@app.route("/login")
+def login():
+    return render_template('login.html')
 
-    if request.method == 'POST':
-         return redirect(url_for('signup'))
+# @app.route("/signup", methods=['GET', 'POST'])
+# def signup_redirect():
+#     if request.method == 'POST':
+#          return redirect(('/signup'))
 
     return render_template('signup_redirect.html')
 
@@ -60,15 +63,6 @@ def validUser():
     else:
             # Incorrect username or password, handle accordingly
             return render_template('login.html')
-
-
-@app.route("/login_redirect", methods=['GET', 'POST'])
-def login_redirect():
-
-    if request.method == 'POST':
-         return redirect(url_for('login'))
-
-    return render_template('login_redirect.html')
 
 @app.route('/signup', methods=["POST"])
 def profile():
