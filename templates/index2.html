@@ -18,23 +18,16 @@
             margin-bottom: 20px;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 5px;
-        }
+        
     </style>
 </head>
 <body>
     <h1>Remindify</h1>
-    <button onclick="buttonClicked('Button 1')">Button 1</button>
-    <a href="login.html"><button>Go to Other Page</button></a>
-
-    <script>
-        function buttonClicked(buttonText) {
-            alert(buttonText + " clicked!");
-            // Add your desired functionality here
-        }
-    </script>
+    <ul>
+        <li><button onclick="location.href='{{ url_for('login') }}'">Go to Login Page</button></li>
+        <li><button onclick="location.href='{{ url_for('signup') }}'">Go to Signup Page</button></li>
+    </ul>
 </body>
+
 </html>
+
