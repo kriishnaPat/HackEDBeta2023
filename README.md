@@ -3,6 +3,9 @@
 ## Project Goal
 Our goal is to develop an application, Remindify, designed to send reminders for weekly habits. The focus is on cultivating short-term habits over a week. The application automates daily reminders with encouraging messages, aiming for widespread accessibility and an enjoyable user experience. We strive to foster a positive environment through the use of positive messages and user-friendly features.
 
+## To-do List Extension
+https://mecsimcalc.com/app/9537838/hack_hers
+
 ## Technologies Used
 
 ### HTML/CSS
