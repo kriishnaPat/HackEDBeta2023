@@ -1,5 +1,4 @@
-# HackEDBeta2023
-# # Remindify Project README
+# Remindify 
 
 ## Project Goal
 Our goal is to develop an application, Remindify, designed to send reminders for weekly habits. The focus is on cultivating short-term habits over a week. The application automates daily reminders with encouraging messages, aiming for widespread accessibility and an enjoyable user experience. We strive to foster a positive environment through the use of positive messages and user-friendly features.
@@ -26,12 +25,13 @@ Our goal is to develop an application, Remindify, designed to send reminders for
 - Used for version control and collaborative development.
 - Facilitates team collaboration, code sharing, and tracking changes.
 
-## Project Phases
+## Screenshots
 
-1. **Connecting Backend to SQL Database**
-   - Establishing a connection between the backend (Flask) and the SQL database (SQLite).
-   - Ensuring smooth data flow for user accounts and reminders.
+![gallery](https://github.com/kriishnaPat/HackEDBeta2023/assets/87027598/97d1e4c6-f067-4634-a9a1-b6ae7daa3219)
 
-2. **Navigating Through Flask**
-   - Understanding and working with Flask for effective backend development.
-   - Utilizing Flask for routing, handling requests, and rendering templates.
+![gallery-2](https://github.com/kriishnaPat/HackEDBeta2023/assets/87027598/045b4e06-7708-496a-ac20-f96b5aad8474)
+
+![gallery-3](https://github.com/kriishnaPat/HackEDBeta2023/assets/87027598/8eb33582-787e-4a85-9b17-86b32df1f356)
+
+
+
