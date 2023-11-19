@@ -3,8 +3,7 @@ from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 import scheduler
 import demotivation
-import send_sms
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import pytz
 
 
@@ -45,13 +44,6 @@ def signup():
 def login():
     return render_template('login.html')
 
-# @app.route("/signup", methods=['GET', 'POST'])
-# def signup_redirect():
-#     if request.method == 'POST':
-#          return redirect(('/signup'))
-
-    return render_template('signup_redirect.html')
-
 @app.route("/message_scheduler")
 def show(): 
     return render_template('message_scheduler.html')
@@ -63,11 +55,10 @@ def validUser():
     user = Profile.query.filter_by(username=username).first()
     if user and user.password == password:
             session['username'] = username
-            # Passwords match, proceed with login
             return redirect('/message_scheduler')
     else:
-            # Incorrect username or password, handle accordingly
-            return render_template('login.html')
+            error_message = "Login failed, incorrect username or password, please try again."
+            return render_template('login.html', error_message=error_message)
 
 @app.route('/signup', methods=["POST"])
 def profile():
@@ -76,7 +67,6 @@ def profile():
     username = request.form.get("username")
     phone = request.form.get("phone_number")   
     password = request.form.get("password")
-
 
     if first_name != '' and last_name != '' and phone != '' and password != '':
         p = Profile(first_name=first_name, last_name=last_name, phone=phone, username=username, password=password)
