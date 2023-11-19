@@ -29,7 +29,6 @@ Our goal is to develop an application, Remindify, designed to send reminders for
 <img width="1440" alt="Screenshot 2023-11-19 at 10 47 15 AM" src="https://github.com/kriishnaPat/HackEDBeta2023/assets/77902389/19814bf9-6041-4b47-b7d7-2fbbcedf73a3">
 
 <img width="1440" alt="Screenshot 2023-11-19 at 10 48 57 AM" src="https://github.com/kriishnaPat/HackEDBeta2023/assets/77902389/8f84a556-b18f-4c68-a62c-bf634ab0d01e">
--f96b5aad8474)
 
 ![gallery-3](https://github.com/kriishnaPat/HackEDBeta2023/assets/87027598/8eb33582-787e-4a85-9b17-86b32df1f356)
 
