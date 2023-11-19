@@ -28,8 +28,30 @@ def home():
     return render_template('index2.html') 
 
 @app.route("/signup")
-def login():
+def signup():
     return render_template('signup.html')
+
+@app.route("/signup_redirect", methods=['GET', 'POST'])
+def signup_redirect():
+
+    if request.method == 'POST':
+         return redirect(url_for('signup'))
+
+    return render_template('signup_redirect.html')
+
+
+
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
+@app.route("/login_redirect", methods=['GET', 'POST'])
+def login_redirect():
+
+    if request.method == 'POST':
+         return redirect(url_for('login'))
+
+    return render_template('login_redirect.html')
 
 @app.route('/add', methods=["POST"])
 def profile():
