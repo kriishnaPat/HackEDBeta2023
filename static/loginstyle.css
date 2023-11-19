@@ -25,4 +25,55 @@ input {
 button {
     padding: 10px 20px;
     font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color: coral;
+    border: none;
 }
+
+.error_message{
+    margin: 20px;
+    color: black;
+}
+
+h2{
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 300%;
+    color:white;
+    text-align: center;
+    margin-left: 35px;
+}
+
+.top-bar {
+    background-color: coral;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+a {
+    padding: 10 10;
+    font-size: 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: turquoise;
+    color: white ;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+}
+

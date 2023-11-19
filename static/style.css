@@ -18,26 +18,34 @@ body {
     }
     
     
-    button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
     }
-    
-    
-    /* Style for the first button */
-    #button1 {
-    background-color: turquoise; /* Set the background color of the first button */
-    color: turquoise; /* Set the text color of the first button */
-    border: none;
+
+    h1 {
+        margin-bottom: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 300%;
+        color:white;
+        text-align: center;
+        margin-left: 35px;
     }
-    
-    
-    /* Style for the second button */
-    #button2 {
-    background-color: mediumaquamarine; /* Set the background color of the second button */
-    color: mediumaquamarine; /* Set the text color of the second button */
-    border: none;
+
+    a {
+        padding: 20px 20px;
+        font-size: 20px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: turquoise;
+        color: white ;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        
     }
     

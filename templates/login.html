@@ -5,35 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="static/loginstyle.css">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        input {
-            margin-bottom: 10px;
-            padding: 8px;
-            font-size: 16px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
+    <div class="top-bar">
+        <div class="logo">HackHer</div>
+        <a href="{{ url_for('/login') }}" class="logout-btn">Logout</a>
+    </div>
     <h2 style="color:white; font-size: 40px";>Login</h2>
     <form action="login" method="post">
         <input type="text" name="username" placeholder="Username" required>

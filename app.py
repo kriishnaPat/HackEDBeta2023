@@ -12,10 +12,8 @@ app = Flask(__name__)
 app.debug = True
 app.secret_key = 'HELLO'
 
-# adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
-# Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
 
 # Models
@@ -29,10 +27,9 @@ class Profile(db.Model):
     password = db.Column(db.String(20), unique=True, nullable=True)
 
 with app.app_context():
-    # Create the tables
     db.create_all()
 
-@app.route("/")
+@app.route("/home")
 def home():
     return render_template('index2.html') 
 
@@ -55,7 +52,7 @@ def validUser():
     user = Profile.query.filter_by(username=username).first()
     if user and user.password == password:
             session['username'] = username
-            return redirect('/message_scheduler')
+            return render_template('message_scheduler.html', msg="")
     else:
             error_message = "Login failed, incorrect username or password, please try again."
             return render_template('login.html', error_message=error_message)
@@ -81,20 +78,18 @@ def send_scheduled_texts():
     username = session.get('username')
     message = request.form.get("goal")
     message = message + " Your motivation for the day: " + demotivation.return_demotivation()
-    date = request.form.get("date")
-    time = request.form.get("time")
-    future = date + ' ' + time
-    date_format = "%Y-%m-%d %H:%M"
-    utc_timezone = pytz.timezone('UTC')
-    date_object = datetime.strptime(future, date_format).astimezone(utc_timezone)
+    date = datetime.now(timezone.utc)
     user = Profile.query.filter_by(username = username).first()
     phone = user.phone
+    print(date)
     try:
-        scheduler.schedule_message(phone, message, date_object)
-        return "done"
+        for i in range(7):
+            date = date + timedelta(minutes=30)
+            scheduler.schedule_message(phone, message, date)
+            return render_template('message_scheduler.html', msg = "Reminder Set!")
     except Exception as e:
         print(e)
-        return "done"
+        return render_template('message_scheduler.html', msg = "There was an issue please try again")
 
 if __name__ == '__main__':
 	app.run()
