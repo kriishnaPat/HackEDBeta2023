@@ -5,34 +5,39 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0; /* Set the background color of the page */
-}
-
-.container {
+    background-color: lightcoral; /* Set the background color of the page */
+    }
+    
+    
+    .container {
     text-align: center;
     padding: 20px;
     background-color: #fff; /* Set the background color of the container */
     border-radius: 10px; /* Add border radius for rounded corners */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-}
-
-button {
+    }
+    
+    
+    button {
     padding: 10px 20px;
     font-size: 16px;
     margin: 5px;
     cursor: pointer;
-}
-
-/* Style for the first button */
-#button1 {
-    background-color: #3498db; /* Set the background color of the first button */
-    color: #fff; /* Set the text color of the first button */
+    }
+    
+    
+    /* Style for the first button */
+    #button1 {
+    background-color: turquoise; /* Set the background color of the first button */
+    color: turquoise; /* Set the text color of the first button */
     border: none;
-}
-
-/* Style for the second button */
-#button2 {
-    background-color: #e74c3c; /* Set the background color of the second button */
-    color: #fff; /* Set the text color of the second button */
+    }
+    
+    
+    /* Style for the second button */
+    #button2 {
+    background-color: mediumaquamarine; /* Set the background color of the second button */
+    color: mediumaquamarine; /* Set the text color of the second button */
     border: none;
-}
+    }
+    

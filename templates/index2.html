@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remindify</title>
+    <link rel="stylesheet" href="static/style.css">
     <style>
         body {
             display: flex;
@@ -16,14 +17,34 @@
 
         h1 {
             margin-bottom: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 300%;
+            color:white;
+            text-align: center;
+            margin-left: 35px;
         }
+
+        button {
+            padding: 20px 20px;
+            font-size: 20px;
+            margin: 5px;
+            cursor: pointer;
+            /* Add background color and text color here */
+            background-color: turquoise;
+            color: white ;
+            border: none;
+            text-align: center;
+            
+        }
+
     </style>
 </head>
 <body>
-    <h1>Remindify</h1>
+    <h1 style="font-size: 70px">Remindify</h1>
     <ul>
-        <li><a href="{{ url_for('login') }}" >Go to Login Page</a></li>
-        <li><a href="{{ url_for('signup') }}">Go to Signup Page</a></li>
+        <button onclick="location.href='{{ url_for('login') }}'">Go to Login Page</button></li>
+        <button onclick="location.href='{{ url_for('signup') }}'">Go to Signup Page</button></li>
+
     </ul>
 </body>
 
