@@ -1,11 +1,10 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, session
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
+import scheduler.py
 
 app = Flask(__name__)
 app.debug = True
-bcrypt = Bcrypt(app)
 
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -22,10 +21,6 @@ class Profile(db.Model):
     phone = db.Column(db.String(20), unique=True, nullable=True)
     username = db.Column(db.String(20), unique=True, nullable=True)
     password = db.Column(db.String(20), unique=True, nullable=True)
-    def set_password(self, password):
-        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
-    def check_password(self, password):
-        return bcrypt.check_password_hash(self.password, password)
 
 with app.app_context():
     # Create the tables
@@ -49,15 +44,12 @@ def validUser():
     password = request.form.get("password") 
     user = Profile.query.filter_by(username=username).first()
     if user and user.password == password:
+            session['username'] = username
             # Passwords match, proceed with login
-            return redirect('/message_scheduler.html')
+            return redirect('/message_schedule')
     else:
             # Incorrect username or password, handle accordingly
             return render_template('login.html')
-
-    #return render_template('login.html')
-
-    
 
 
 @app.route('/signup', methods=["POST"])
@@ -68,6 +60,7 @@ def profile():
     phone = request.form.get("phone_number")   
     password = request.form.get("password")
 
+
     if first_name != '' and last_name != '' and phone != '' and password != '':
         p = Profile(first_name=first_name, last_name=last_name, phone=phone, username=username, password=password)
         db.session.add(p)
@@ -76,19 +69,19 @@ def profile():
     else:
         return redirect('/')
     
-@app.route("/v1/message/schedule", methods=["POST"])
+@app.route("/message_schedule", methods=["POST"])
 def send_scheduled_texts():
+    username = session.get('username')
+    message = request.form.get("goal")
+    time = request.form.get("time")
+    user = Profile.query.filter_by(username = username).first()
+    phone = user.phone
     try:
-        data = request.get_json()
-        to_number = data.get("number")
-        minutes_ahead = data.get("minutes")
-        message = data.get("message")
-
-        schedule_message(to_number, minutes_ahead, message)
-        return Response('{"status": "Message sent successfully"}', status=201, mimetype='application/json')
+        scheduler.schedule_message(phone, time, message)
+        return "done"
     except Exception as e:
         print(e)
-        return Response('{"status": "Message was not sent"}', status=500, mimetype='application/json')
+        return "done"
 
 if __name__ == '__main__':
 	app.run()

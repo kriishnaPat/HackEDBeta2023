@@ -31,8 +31,6 @@ def schedule_message(minutes, body):
         raise
 
 
-
-
 def minutes_from_now(minutes):
    if (minutes > 15 and minutes < 10080):
        return datetime.utcnow() + timedelta(minutes=minutes)
