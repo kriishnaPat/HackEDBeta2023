@@ -22,6 +22,19 @@ input {
     font-size: 16px;
 }
 
+a {
+    padding: 10 10;
+    font-size: 20px;
+    margin: 5px;
+    margin-right: 20px;
+    cursor: pointer;
+    background-color: turquoise;
+    color: white ;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+}
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -31,6 +44,11 @@ button {
     font-size: 16px;
     background-color: coral;
     border: none;
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    border: 1px solid white;
+    border-radius: 4px;
 }
 
 .error_message{
@@ -44,5 +62,38 @@ h2{
     font-size: 300%;
     color:white;
     text-align: center;
-    margin-left: 35px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: coral;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.logout {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+body {
+    margin-top: 60px; 
 }

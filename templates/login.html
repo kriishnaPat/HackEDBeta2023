@@ -6,6 +6,10 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="static/loginstyle.css">
 </head>
+<header>
+    <div class="logo">HackHER</div>
+    <a href="{{ url_for('signup') }}" class="logout">Sign Up</a>
+</header>
 <body>
     <h2 style="color:white; font-size: 40px";>Login</h2>
     <form action="login" method="post">

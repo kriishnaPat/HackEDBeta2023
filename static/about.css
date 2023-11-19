@@ -97,3 +97,23 @@ header {
 body {
     margin-top: 60px; 
 }
+
+.login1{
+    float: right;
+}
+
+.text{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: coral;
+    padding: 20px;
+    margin: 50px;
+    border-radius: 10px;
+}
+
+.about{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
