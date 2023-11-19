@@ -15,7 +15,7 @@ auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 client = Client(account_sid, auth_token)
 
 
-def schedule_message(minutes, body):
+def schedule_message(minutes, body, date):
     try:
         message = client.messages \
             .create(
@@ -23,7 +23,7 @@ def schedule_message(minutes, body):
                 to = '+17804059975',
                 body = body,
                 schedule_type = 'fixed',
-                send_at = minutes_from_now(minutes)
+                send_at = date
             )
         print(message.sid)
     except TwilioRestException as e:
@@ -36,10 +36,5 @@ def minutes_from_now(minutes):
        return datetime.utcnow() + timedelta(minutes=minutes)
    else:
        print('Message must be scheduled more than 15 minutes and fewer than 7 days in advance.')
-
-
-
-
-schedule_message(16, 'Ahoy, world! This is another scheduled message in Python.')
 
 
