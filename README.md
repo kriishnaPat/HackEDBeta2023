@@ -35,5 +35,14 @@ https://mecsimcalc.com/app/9537838/hack_hers
 
 ![gallery-3](https://github.com/kriishnaPat/HackEDBeta2023/assets/87027598/8eb33582-787e-4a85-9b17-86b32df1f356)
 
+## Future Improvements
+- Security enhancement for databases
+- More interactive features 
+- Using a calendar to track reminders
+- Reminder snooze and dismiss
+- Mobile app integration
+- Build on our MecSimCalc prototype app so we can integrate it into our remindify app.
+
+
 
 
