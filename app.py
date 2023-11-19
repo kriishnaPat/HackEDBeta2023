@@ -86,7 +86,7 @@ def send_scheduled_texts():
     print(date)
     try:
         for i in range(7):
-            date = date + timedelta(minutes=30)
+            date = date + timedelta(days=1)
             scheduler.schedule_message(phone, message, date)
             return render_template('message_scheduler.html', msg = "Reminder Set!")
     except Exception as e:
