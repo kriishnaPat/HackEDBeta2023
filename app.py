@@ -2,7 +2,12 @@ from flask import Flask, request, redirect, session
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 import scheduler
+import demotivation
 import send_sms
+from datetime import datetime
+import pytz
+
+
 
 app = Flask(__name__)
 app.debug = True
@@ -85,11 +90,17 @@ def profile():
 def send_scheduled_texts():
     username = session.get('username')
     message = request.form.get("goal")
+    message = message + " Your motivation for the day: " + demotivation.return_demotivation()
+    date = request.form.get("date")
     time = request.form.get("time")
+    future = date + ' ' + time
+    date_format = "%Y-%m-%d %H:%M"
+    utc_timezone = pytz.timezone('UTC')
+    date_object = datetime.strptime(future, date_format).astimezone(utc_timezone)
     user = Profile.query.filter_by(username = username).first()
     phone = user.phone
     try:
-        send_sms.message(phone, message)
+        scheduler.schedule_message(phone, message, date_object)
         return "done"
     except Exception as e:
         print(e)
@@ -97,3 +108,4 @@ def send_scheduled_texts():
 
 if __name__ == '__main__':
 	app.run()
+

@@ -36,7 +36,8 @@
     <h2>Send Message</h2>
     <form action="message_scheduler" method="post">
         <input type="text" name="goal" placeholder="Enter your goal here!" required>
-        <input type="text" name="time" placeholder="Enter the time in which you would like to be reminded!" required>
+        <input type="date" name="date" placeholder="Enter the day you would like to be reminded!" required>
+        <input type="time" name="time" placeholder="Enter the time you would like to be reminded at" required>
         <button type="submit">Submit</button>
     </form>
 </body>
