@@ -6,8 +6,6 @@ import demotivation
 from datetime import datetime, timedelta, timezone
 import pytz
 
-
-
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'HELLO'
@@ -29,7 +27,7 @@ class Profile(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route("/home")
+@app.route("/")
 def home():
     return render_template('index2.html') 
 
