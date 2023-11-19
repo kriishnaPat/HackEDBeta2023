@@ -1,10 +1,12 @@
 from flask import Flask, request, redirect, session
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
-import scheduler.py
+import scheduler
+import send_sms
 
 app = Flask(__name__)
 app.debug = True
+app.secret_key = 'HELLO'
 
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -42,6 +44,10 @@ def signup_redirect():
 
     return render_template('signup_redirect.html')
 
+@app.route("/message_scheduler")
+def show(): 
+    return render_template('message_scheduler.html')
+
 @app.route("/login", methods=['GET',"POST"])
 def validUser():
     username = request.form.get("username")
@@ -50,7 +56,7 @@ def validUser():
     if user and user.password == password:
             session['username'] = username
             # Passwords match, proceed with login
-            return redirect('/message_schedule')
+            return redirect('/message_scheduler')
     else:
             # Incorrect username or password, handle accordingly
             return render_template('login.html')
@@ -81,7 +87,7 @@ def profile():
     else:
         return redirect('/')
     
-@app.route("/message_schedule", methods=["POST"])
+@app.route("/message_scheduler", methods=["GET", "POST"])
 def send_scheduled_texts():
     username = session.get('username')
     message = request.form.get("goal")
@@ -89,7 +95,7 @@ def send_scheduled_texts():
     user = Profile.query.filter_by(username = username).first()
     phone = user.phone
     try:
-        scheduler.schedule_message(phone, time, message)
+        send_sms.message(phone, message)
         return "done"
     except Exception as e:
         print(e)
