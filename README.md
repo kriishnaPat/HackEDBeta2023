@@ -35,14 +35,3 @@ Our goal is to develop an application, Remindify, designed to send reminders for
 2. **Navigating Through Flask**
    - Understanding and working with Flask for effective backend development.
    - Utilizing Flask for routing, handling requests, and rendering templates.
-
-3. **Security Enhancement for Databases**
-   - Implementing security measures to protect user data in the SQLite database.
-   - Ensuring secure authentication and authorization mechanisms.
-
-4. **More Interactive Features**
-   - Enhancing user engagement with additional interactive elements.
-   - Exploring features that make the application more dynamic and user-driven.
-
-5. **Using a Calendar to Track Reminders**
-   - Integrating a calendar
