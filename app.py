@@ -5,6 +5,7 @@ import scheduler
 import demotivation
 from datetime import datetime, timedelta, timezone
 import pytz
+import send_sms
 
 app = Flask(__name__)
 app.debug = True
@@ -81,14 +82,16 @@ def send_scheduled_texts():
     message = request.form.get("goal")
     message = message + " Your motivation for the day: " + demotivation.return_demotivation()
     date = datetime.now(timezone.utc)
+    time = request.form.get("time")
     user = Profile.query.filter_by(username = username).first()
     phone = user.phone
     print(date)
+    send_sms.message(phone, message)
+    return render_template('message_scheduler.html', msg = "Reminder Set!")
     try:
         for i in range(7):
             date = date + timedelta(days=1)
-            scheduler.schedule_message(phone, message, date)
-            return render_template('message_scheduler.html', msg = "Reminder Set!")
+            
     except Exception as e:
         print(e)
         return render_template('message_scheduler.html', msg = "There was an issue please try again")
